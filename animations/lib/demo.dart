@@ -1,8 +1,13 @@
+import 'dart:js';
+
 import 'package:aminations/src/basics/01_animated_container.dart';
 import 'package:aminations/src/basics/02_page_route_builder.dart';
 import 'package:aminations/src/basics/03_animation_controller.dart';
 import 'package:aminations/src/basics/04_tweens.dart';
 import 'package:aminations/src/basics/05_animated_builder.dart';
+import 'package:aminations/src/basics/06_custom_tween.dart';
+import 'package:aminations/src/basics/07_tween_sequence.dart';
+import 'package:aminations/src/basics/08_fade_transition.dart';
 import 'package:flutter/material.dart';
 
 class Demo {
@@ -40,6 +45,21 @@ class Demo {
         name: AnimatedBuilderDemo.demoName,
         route: AnimatedBuilderDemo.routeName,
         builder: (context) => AnimatedBuilderDemo(),
+      ),
+      Demo(
+        name: CustomTweenDemo.demoName,
+        route: CustomTweenDemo.routeName,
+        builder: (context) => CustomTweenDemo(),
+      ),
+      Demo(
+        name: TweenSequenceDemo.demoName,
+        route: TweenSequenceDemo.routeName,
+        builder: (context) => TweenSequenceDemo() 
+      ),
+      Demo(
+        name: FadeTransitionDemo.demoName,
+        route: FadeTransitionDemo.routeName,
+        builder: (context) => FadeTransitionDemo(),
       )
     ];
   }

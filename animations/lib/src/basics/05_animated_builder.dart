@@ -13,7 +13,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo>
 
     static const beginColor = Colors.deepPurple;
     static const endColor = Colors.deepOrange;
-    Duration duration = Duration(milliseconds: 800);
+    Duration duration = Duration(seconds: 2);
 
     AnimationController controller;
     Animation<Color> animation;
@@ -37,6 +37,28 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo>
     return Scaffold(
       appBar: AppBar(
         title: Text(AnimatedBuilderDemo.demoName),
+      ),
+      body: Center(
+        child: AnimatedBuilder(
+          animation: animation,
+          builder: (context, child) {
+            return MaterialButton(
+              color: animation.value,
+              child: child,
+              onPressed: () {
+                if(controller.status == AnimationStatus.completed) {
+                  controller.reverse();
+                } else {
+                  controller.forward();
+                }
+              }
+            );
+          },
+          child: Text(
+            'Change Color',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
       ),
     );
   }
