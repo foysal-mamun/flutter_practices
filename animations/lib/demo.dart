@@ -8,6 +8,8 @@ import 'package:aminations/src/basics/07_tween_sequence.dart';
 import 'package:aminations/src/basics/08_fade_transition.dart';
 import 'package:aminations/src/basics/09_animated_positioned.dart';
 import 'package:aminations/src/basics/10_animated_switcher.dart';
+import 'package:aminations/src/misc/carousel.dart';
+import 'package:aminations/src/misc/expand_card.dart';
 import 'package:flutter/material.dart';
 
 class Demo {
@@ -72,6 +74,23 @@ class Demo {
         builder: (context) => AnimatedSwitcherDemo(),
       )
     ];
+  }
+
+  static List<Demo> miscDemo() {
+
+    return [
+      Demo(
+        name: ExpandCardDemo.demoName,
+        route: ExpandCardDemo.routeName,
+        builder: (context) => ExpandCardDemo(), 
+      ),
+      Demo(
+        name: CarouselDemo.demoName,
+        route: CarouselDemo.routeName,
+        builder: (context) => CarouselDemo(),
+      )
+    ];
+
   }
   
 }

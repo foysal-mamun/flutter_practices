@@ -6,8 +6,12 @@ import 'home_page.dart';
 final basicDemoRoutes = 
     Map.fromEntries(Demo.basicDemos().map((e) => MapEntry(e.route, e.builder)));
 
+final miscDemoRoutes = 
+    Map.fromEntries(Demo.miscDemo().map((e) => MapEntry(e.route, e.builder)));
+
 final allRoutes = <String, WidgetBuilder>{
-    ...basicDemoRoutes
+    ...basicDemoRoutes,
+    ...miscDemoRoutes
 };
 
 class AnimationSamples extends StatelessWidget {

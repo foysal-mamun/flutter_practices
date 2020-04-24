@@ -21,7 +21,8 @@ class HomePage extends StatelessWidget{
           ...Demo.basicDemos().map((e) => DemoTile(e)),
           ListTile(
             title: Text('Misc', style: headerStyle,)
-          )
+          ),
+          ...Demo.miscDemo().map((e) => DemoTile(e))
         ],
       ),
     );
