@@ -10,6 +10,8 @@ import 'package:aminations/src/basics/09_animated_positioned.dart';
 import 'package:aminations/src/basics/10_animated_switcher.dart';
 import 'package:aminations/src/misc/carousel.dart';
 import 'package:aminations/src/misc/expand_card.dart';
+import 'package:aminations/src/misc/focus_image.dart';
+import 'package:aminations/src/misc/hero_animation.dart';
 import 'package:flutter/material.dart';
 
 class Demo {
@@ -88,6 +90,16 @@ class Demo {
         name: CarouselDemo.demoName,
         route: CarouselDemo.routeName,
         builder: (context) => CarouselDemo(),
+      ),
+      Demo(
+        name: FocusImageDemo.demoName,
+        route: FocusImageDemo.routeName,
+        builder: (context) => FocusImageDemo(),
+      ),
+      Demo(
+        name: HeroAnimationDemo.demoName,
+        route: HeroAnimationDemo.routeName,
+        builder: (context) => HeroAnimationDemo(),
       )
     ];
 
