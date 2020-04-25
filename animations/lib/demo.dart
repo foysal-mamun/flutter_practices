@@ -8,10 +8,14 @@ import 'package:aminations/src/basics/07_tween_sequence.dart';
 import 'package:aminations/src/basics/08_fade_transition.dart';
 import 'package:aminations/src/basics/09_animated_positioned.dart';
 import 'package:aminations/src/basics/10_animated_switcher.dart';
+import 'package:aminations/src/misc/animated_list.dart';
+import 'package:aminations/src/misc/card_swipe.dart';
 import 'package:aminations/src/misc/carousel.dart';
+import 'package:aminations/src/misc/curved_animation.dart';
 import 'package:aminations/src/misc/expand_card.dart';
 import 'package:aminations/src/misc/focus_image.dart';
 import 'package:aminations/src/misc/hero_animation.dart';
+import 'package:aminations/src/misc/repeating_animation.dart';
 import 'package:flutter/material.dart';
 
 class Demo {
@@ -100,6 +104,26 @@ class Demo {
         name: HeroAnimationDemo.demoName,
         route: HeroAnimationDemo.routeName,
         builder: (context) => HeroAnimationDemo(),
+      ),
+      Demo(
+        name: CardSwipeDemo.demoName,
+        route: CardSwipeDemo.routeName,
+        builder: (context) => CardSwipeDemo(),
+      ),
+      Demo(
+        name: AnimatedListDemo.demoName,
+        route: AnimatedListDemo.routeName,
+        builder: (context) => AnimatedListDemo(),
+      ),
+      Demo(
+        name: RepeatingAnimationDemo.demoName,
+        route: RepeatingAnimationDemo.routeName,
+        builder: (context) => RepeatingAnimationDemo(),
+      ),
+      Demo(
+        name: CurvedAnimationDemo.demoName,
+        route: CurvedAnimationDemo.routeName,
+        builder: (context) => CurvedAnimationDemo(),
       )
     ];
 
