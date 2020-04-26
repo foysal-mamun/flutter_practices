@@ -15,6 +15,7 @@ import 'package:aminations/src/misc/curved_animation.dart';
 import 'package:aminations/src/misc/expand_card.dart';
 import 'package:aminations/src/misc/focus_image.dart';
 import 'package:aminations/src/misc/hero_animation.dart';
+import 'package:aminations/src/misc/physics_card_drag.dart';
 import 'package:aminations/src/misc/repeating_animation.dart';
 import 'package:flutter/material.dart';
 
@@ -124,6 +125,11 @@ class Demo {
         name: CurvedAnimationDemo.demoName,
         route: CurvedAnimationDemo.routeName,
         builder: (context) => CurvedAnimationDemo(),
+      ),
+      Demo(
+        name: PhysicsCardDragDemo.demoName,
+        route: PhysicsCardDragDemo.routeName,
+        builder: (context) => PhysicsCardDragDemo(),
       )
     ];
 

@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class CurvedAnimationDemo extends StatefulWidget {
@@ -38,7 +39,49 @@ class _CurvedAnimationDemoState extends State<CurvedAnimationDemo> with SingleTi
   void initState() {
     super.initState();
 
+    controller = AnimationController(
+      vsync: this,
+      duration: _duration
+    );
+
     selectedForwardCurve = curves[0];
+    selectedReverseCurve = curves[0];
+
+    curvedAnimation = CurvedAnimation(
+      parent: controller, 
+      curve: selectedForwardCurve.curve,
+      reverseCurve: selectedReverseCurve.curve
+    );
+
+    animationRotation = Tween<double>(
+      begin: 0,
+      end: 2 * math.pi
+    ).animate(curvedAnimation)
+    ..addListener(() {
+      setState(() {
+        
+      });
+    })
+    ..addStatusListener((status) {
+      if(status == AnimationStatus.completed) {
+        controller.reverse();
+      }
+    });
+
+    animationTranslation = Tween<Offset>(
+      begin: Offset(-1, 0),
+      end: Offset(1, 0)
+    ).animate(curvedAnimation)
+    ..addListener(() {
+      setState(() {
+        
+      });
+    })
+    ..addStatusListener((status) { 
+      if(status == AnimationStatus.completed) {
+        controller.reverse();
+      }
+    });
   }
 
   @override
@@ -56,7 +99,10 @@ class _CurvedAnimationDemoState extends State<CurvedAnimationDemo> with SingleTi
       body: Column(
         children: <Widget>[
           SizedBox(height: 20.0),
-          Text('Select Curve for forwar motion', style: Theme.of(context).textTheme.headline6,),
+          Text(
+            'Select Curve for forwar motion', 
+            style: Theme.of(context).textTheme.headline6,
+          ),
           DropdownButton<CurveChoice>(
             items: curves.map((curve) {
               return DropdownMenuItem<CurveChoice>(
@@ -64,6 +110,55 @@ class _CurvedAnimationDemoState extends State<CurvedAnimationDemo> with SingleTi
               );
             }).toList(),
             value: selectedForwardCurve,
+            onChanged: (newCurve) {
+              setState(() {
+                selectedForwardCurve = newCurve;
+                curvedAnimation.curve = selectedForwardCurve.curve;
+              });
+            },
+          ),
+          SizedBox(height: 15.0,),
+          Text(
+            'Select Curve for reverse motion',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          DropdownButton<CurveChoice>(
+            items: curves.map((curve) {
+              return DropdownMenuItem<CurveChoice>(
+                child: Text(curve.name),
+                value: curve,
+              );
+            }).toList(), 
+            onChanged: (newcurve){
+              setState(() {
+                selectedReverseCurve = newcurve;
+                curvedAnimation.reverseCurve = selectedReverseCurve.curve;
+              });
+            },
+            value: selectedReverseCurve,
+          ),
+          SizedBox(height: 35.0,),
+          Transform.rotate(
+            angle: animationRotation.value,
+            child: Center(
+              child: Container(
+                child: FlutterLogo(size: 100,),
+              ),
+            ),
+          ),
+          SizedBox(height: 35.0,),
+          FractionalTranslation(
+            translation: animationTranslation.value,
+            child: Container(
+              child: FlutterLogo(size: 100,),
+            ),
+          ),
+          SizedBox(height: 25.0,),
+          RaisedButton(
+            onPressed: () {
+              controller.forward();
+            },
+            child: Text('Animate'),
           )
         ],
       ),
