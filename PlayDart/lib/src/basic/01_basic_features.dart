@@ -147,6 +147,23 @@ class GridContainer extends StatelessWidget {
             print('typed function => ${doMultiply(2)}');
             print('without typed function => ${doMultiply1(2)}');
             print('arrow function => ${doMultiply2(2)}');
+            print('named param function => ${namedParamFun(a: 1, b: 3)}');
+            print('required param function => ${requiredParamFun(a: 1, b: 5)}');
+            print('Positional params call 1 => ${say('bob', 'Howdy')}');
+            print('Positional params call 2 => ${say('bob', 'Howdy', 'iphone')}');
+            print('default ParamV alues call 1 => ${defaultParamValues(a: 1, b: 6)}');
+            print('default ParamV alues call 2 => ${defaultParamValues(b: 10)}');
+            print('default value for positoinal params => ${say1('foysal', 'hi')}');
+
+            var list = [1,2,3];
+            print('Functions as first-class objects');
+            list.forEach(printElement);
+            var loudify = (msg) => '!!! ${msg.toUpperCase()} !!!';
+            print(loudify('Foysal'));
+
+            print('Lexical closures || Function type');
+            var add2 = makeAdder(2);
+            print('add 2 3 => ${add2(3)}');
           })
         ],
       ),
@@ -181,4 +198,33 @@ class GridContainer extends StatelessWidget {
   }
 
   int doMultiply2(aNum) => aNum * aNum;
+
+  int namedParamFun({ int a, int b }) {
+    return a + b;
+  }
+
+  int requiredParamFun({ int a, @required int b }) {
+    return a + b;
+  }
+
+  String say(String from, String msg, [String device]) {
+    var result = '$from says $msg';
+    return device != null ? '$result with a $device' : result;
+  }
+
+  int defaultParamValues({int a = 1, int b = 2}) {
+    return a + b;
+  }
+
+  String say1(String from, String msg, [String device = 'iphone']) {
+    return '$from saya $msg ${device != null ? 'with $device' : ''}';
+  }
+
+  void printElement(int e) {
+    print(e);
+  }
+
+  Function makeAdder(num addBy) {
+    return (num i) => addBy + i;
+  }
 }
