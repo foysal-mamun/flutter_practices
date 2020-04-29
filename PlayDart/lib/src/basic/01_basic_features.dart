@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:characters/characters.dart';
 import 'package:flutter/material.dart';
 
@@ -164,6 +166,15 @@ class GridContainer extends StatelessWidget {
             print('Lexical closures || Function type');
             var add2 = makeAdder(2);
             print('add 2 3 => ${add2(3)}');
+          }),
+          customRaisedButton(context: context, label: 'For Loops', callback: () {
+            forLoops();
+          }),
+          customRaisedButton(context: context, label: 'Assert', callback: () {
+            testAssert();
+          }),
+          customRaisedButton(context: context, label: 'Classes', callback: () {
+            testClasses();
           })
         ],
       ),
@@ -226,5 +237,90 @@ class GridContainer extends StatelessWidget {
 
   Function makeAdder(num addBy) {
     return (num i) => addBy + i;
+  }
+
+  void forLoops() {
+    var message = StringBuffer('Dart is fun');
+    for(var i = 0; i < 5; i++) {
+      message.write('!');
+    }
+    print(message);
+
+    var callbacks = [];
+    for(var i = 0; i < 2; i++ ) {
+      callbacks.add( () => print('-$i'));
+    }
+    callbacks.forEach((c) => c());
+
+    var collection = [1,2,3];
+    for(var x in collection) {
+      print(x);
+    }
+  }
+
+  void testAssert() {
+
+    try {
+      assert(10 < 9, '10 < 9');
+      assert(10 == 10, '10 == 10');
+    } catch (e) {
+      print('$e');
+    }
+    
+    print('testing assert');
+    assert(5 == 5);
+  }
+
+  void testClasses() {
+    var point = Point(1, 3);
+    point.x = 4;
+    print('unnamed constructor x = ${point.x}, y = ${point.y}');
+
+    var p1 = Point.origin();
+    print('named constructor, x = ${p1.x}, y = ${p1.y}');
+
+    var emp = Employee.fromJson({});
+    (emp as Person).fristName = 'foysal';
+    print(emp.fristName);
+
+    var p2 = Point.initializ(2, 2);
+    print(p2.disFromOrigin);
+
+    var p3 = Point.redirecting(5);
+    print('redirecting constructor, x = ${p3.x}, y = ${p3.y}, disFromOrigin = ${p3.disFromOrigin}');
+  }
+
+}
+
+class Point {
+  num x;
+  num y;
+  num z = 0;
+  num disFromOrigin;
+
+  Point(this.x, this.y);
+
+  Point.origin() {
+    x = 0;
+    y = 0;
+  }
+
+  Point.initializ(this.x, this.y) : disFromOrigin = sqrt(x*x + y*y);
+
+  Point.redirecting(num x) : this.initializ(x, 4);
+
+}
+
+class Person {
+  String fristName;
+
+  Person.fromJson(Map data) {
+    print('In person');
+  }
+}
+
+class Employee extends Person {
+  Employee.fromJson(Map data) : super.fromJson(data) {
+    print('In Employee');
   }
 }
