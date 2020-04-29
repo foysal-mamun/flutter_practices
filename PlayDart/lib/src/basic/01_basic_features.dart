@@ -288,9 +288,40 @@ class GridContainer extends StatelessWidget {
 
     var p3 = Point.redirecting(5);
     print('redirecting constructor, x = ${p3.x}, y = ${p3.y}, disFromOrigin = ${p3.disFromOrigin}');
+
+    var logger = Logger('UI');
+    logger.log('Button clicked');
+
+    var logger1 = Logger('UI');
+    logger1.log('Button clicked');
+
+    var rect = Rectangle(3, 4, 20, 15);
+    print('rect left = ${rect.left}');
+    print('rect right = ${rect.right}');
+    rect.right = 12;
+    print('rect left = ${rect.left}');
+    print('rect right = ${rect.right}');
+
+    var effctiveDoer = EffetiveDoer();
+    effctiveDoer.doSomething();
+
+    print(greetBob(Person1('Kathy')));
+    print(greetBob(Imposter()));
+
+    
+    print(Color1.red);
+
+    List<Color1> colors = Color1.values;
+    print(colors);
+
   }
 
+  String greetBob(Person1 person) => person.greet('Bob');
+
 }
+
+
+enum Color1 {red, green, blue}
 
 class Point {
   num x;
@@ -323,4 +354,56 @@ class Employee extends Person {
   Employee.fromJson(Map data) : super.fromJson(data) {
     print('In Employee');
   }
+}
+
+class Logger {
+  final String name;
+  bool mute = false;
+
+  static final Map<String, Logger> _cache = <String, Logger>{};
+
+  factory Logger(String name) {
+    print(_cache);
+    return _cache.putIfAbsent(name, () => Logger._internal(name));
+  }
+
+  Logger._internal(this.name);
+
+  void log(String msg) {
+    if(!mute) print(msg);
+  }
+}
+
+class Rectangle {
+  num left, top, width, height;
+
+  Rectangle(this.left, this.top, this.width, this.height);
+
+  num get right => left + width;
+  set right(num value) => left = value - width;
+}
+
+abstract class Doer  {
+  void doSomething();
+}
+
+class EffetiveDoer extends Doer {
+  @override
+  void doSomething() {
+    print('abstract');  // TODO: implement doSomething
+  }
+}
+
+class Person1 {
+  final _name;
+
+  Person1(this._name);
+
+  String greet(String who) => 'Hello, $who, I am $_name.';
+} 
+
+class Imposter implements Person1 {
+  get _name => '';
+
+  String greet(String who) => 'Hi $who. Do you know who I am?';
 }
