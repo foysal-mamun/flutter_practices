@@ -175,6 +175,9 @@ class GridContainer extends StatelessWidget {
           }),
           customRaisedButton(context: context, label: 'Classes', callback: () {
             testClasses();
+          }),
+          customRaisedButton(context: context, label: 'Generics', callback: () {
+            testGenerics();
           })
         ],
       ),
@@ -314,6 +317,10 @@ class GridContainer extends StatelessWidget {
     List<Color1> colors = Color1.values;
     print(colors);
 
+    var pp1 = Point1(2, 2);
+    var pp2 = Point1(4, 4);
+    print( Point1.distanceBetween(pp1, pp2) );
+
   }
 
   String greetBob(Person1 person) => person.greet('Bob');
@@ -350,9 +357,10 @@ class Person {
   }
 }
 
-class Employee extends Person {
+class Employee extends Person with Musical {
   Employee.fromJson(Map data) : super.fromJson(data) {
     print('In Employee');
+    entertainMe();
   }
 }
 
@@ -406,4 +414,44 @@ class Imposter implements Person1 {
   get _name => '';
 
   String greet(String who) => 'Hi $who. Do you know who I am?';
+}
+
+mixin Musical {
+
+  void entertainMe() {
+    print('Playing Piano');
+  }
+}
+
+class Point1 {
+  num x, y;
+
+  Point1(this.x, this.y);
+
+  static num distanceBetween(Point1 a, Point1 b) {
+    var dx = a.x - b.x;
+    var dy = a.y - b.y;
+
+    return sqrt(dx * dx + dy * dy);
+
+  }
+}
+
+void testGenerics() {
+
+  var names = List<String>();
+  names.addAll(['a', 'b', 'c']);
+
+  var names1 = <String>['s', 'k', 'l'];
+  var uniqueNames = <String>{'s', 'k', 'l'};
+  var pages = <String, String>{
+    'index.html': 'Home Page',
+    'robots.txt': 'Hints for web robots',
+  };
+  // names.add(1);
+}
+
+abstract class Cache<T> {
+  T getByKey(String key);
+  void setByKey(String key, T value);
 }
