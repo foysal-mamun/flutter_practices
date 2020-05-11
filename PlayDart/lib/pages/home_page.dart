@@ -19,7 +19,11 @@ class HomePage extends StatelessWidget {
           ListTile(
             title: Text('A basic Dart program', style: headerStyle),
           ),
-          ...Demo.basicDemos().map((e) => DemoTile(e))
+          ...Demo.basicDemos().map((e) => DemoTile(e)),
+          ListTile(
+            title: Text('Dart by Example', style: headerStyle),
+          ),
+          ...Demo.byExampleDemos().map((e) => DemoTile(e))
         ],
       ),
     );

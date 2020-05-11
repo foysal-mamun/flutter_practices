@@ -54,7 +54,7 @@ class _LoginFormState extends State<LoginForm> {
               value: _formProgress,
             ),
             Text(
-              'Sign Up',
+              'Sign Up1',
               style: Theme.of(context).textTheme.headline4,
             ),
             Padding(

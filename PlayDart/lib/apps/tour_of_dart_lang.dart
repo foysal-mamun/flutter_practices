@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 final basicDemoRoutes = 
   Map.fromEntries(Demo.basicDemos().map((e) => MapEntry(e.route, e.builder)));
 
+final byExampleDemoRoutes = 
+  Map.fromEntries(Demo.byExampleDemos().map((e) => MapEntry(e.route, e.builder)));
+
 final allRoutes = <String, WidgetBuilder>{
-  ...basicDemoRoutes
+  ...basicDemoRoutes,
+  ...byExampleDemoRoutes
 };
 
 class TourOfDartLang extends StatelessWidget {
