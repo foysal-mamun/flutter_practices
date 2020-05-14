@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:collection';
+import 'dart:math';
 
 class ByExampleDemos extends StatelessWidget {
 	static const String demoName = 'By Example';
@@ -271,6 +272,99 @@ class GridContainer extends StatelessWidget {
 
           }),
 
+          customRaisedButton(context: context, label: 'Optoinal Params', callback: () {
+
+            String yell(String str, [bool exclaim = false]) {
+              var result = str.toUpperCase();
+              if(exclaim) result = result + '!!!';
+
+              return result;
+            }
+
+            String whisper(String str, {bool mysteriously: false}) {
+
+              var result = str.toLowerCase();
+              if(mysteriously) result = result + '...';
+
+              return result;
+            }
+
+            print(yell('Foysal '));
+            print(yell('Foysal ', true));
+            print(whisper('Mamun '));
+            print(whisper('Mamun ', mysteriously: true));
+
+          }),
+
+          customRaisedButton(context: context, label: 'Lexical Scope', callback: () {
+
+            var functions = [];
+            for(var i = 0; i < 2; i++) {
+              functions.add(() => i);
+            }
+
+            functions.forEach((fn) => print(fn()));
+
+          }),
+
+          customRaisedButton(context: context, label: 'Function Types', callback: () {
+
+            bool positive(int n) => n >= 0;
+            bool lessThan100(int n) => n < 100;
+
+            bool bothValid(int n, Validator v1, Validator v2) {
+              return v1(n) && v2(n);
+            }
+
+            print( bothValid(10, positive, lessThan100) );
+
+          }),
+
+          customRaisedButton(context: context, label: 'Unused Variables', callback: () {
+
+            for(var i in new Iterable.generate(1)) {
+              print('not usesing "i"');
+            }
+
+            for(var _ in new Iterable.generate(1)) {
+              print('no warn');
+            }
+
+          }),
+
+          customRaisedButton(context: context, label: 'Constants', callback: () {
+
+            const name = 'greg';
+            print(name);
+
+            const Rectangle bounds = const Rectangle(0, 0, 5, 5);
+            print(bounds);
+
+          }),
+
+          customRaisedButton(context: context, label: 'Final', callback: () {
+
+            //final String name = 'Foysal';
+            //try {
+            //  name = 'Mamun';
+            //} catch (e) {
+            //  print(e);
+            //}
+
+          }),
+
+          customRaisedButton(context: context, label: 'Static', callback: () {
+
+            //var p = new Potato();
+            print(Potato.amount);
+            print(Potato.getAmount());
+          }),
+
+          customRaisedButton(context: context, label: 'Unused', callback: () {}),
+          customRaisedButton(context: context, label: 'Unused', callback: () {}),
+          customRaisedButton(context: context, label: 'Unused', callback: () {}),
+          customRaisedButton(context: context, label: 'Unused', callback: () {}),
+
         ]
       )
     );
@@ -286,13 +380,18 @@ class GridContainer extends StatelessWidget {
   }
 }
 
+typedef Validator = bool Function(int n);
+
 class FoodSpoiledError extends StateError {
   FoodSpoiledError(String msg) : super(msg);
 }
 
 class Potato {
   int age;
+  static int amount = 10;
+
   Potato(this.age);
+  
 
   String peel() {
 
@@ -302,4 +401,6 @@ class Potato {
 
     return 'peeled';
   }
+
+  static int getAmount() => amount;
 }
