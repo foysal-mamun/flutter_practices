@@ -360,6 +360,51 @@ class GridContainer extends StatelessWidget {
             print(Potato.getAmount());
           }),
 
+          customRaisedButton(context: context, label: 'Classes', callback: () {
+
+            var origin = new Position1()
+              ..x = 0
+              ..y = 0;
+            print("${origin.x}, ${origin.y}");
+
+            var other = new Position1()
+              ..x = -5
+              ..y = 6;
+            print('${other.x}, ${other.y}');
+            print(origin.distanceTo(other));
+
+          }),
+
+          customRaisedButton(context: context, label: 'Constructors', callback: () {
+
+            print(new Position(30, 40));
+            print(new Position.atOrigin());
+            print(new Position.fromMap({ 'x': 4, 'y': 100}));
+
+          }),
+
+          customRaisedButton(context: context, label: 'Initializer Lists', callback: () {
+
+            print(new Position2(1, 2));
+
+          }),
+
+          customRaisedButton(context: context, label: 'Getters and Setters', callback: () {
+
+            var p = new Position3(10, 20);
+            print(p._x);
+            p.x = 20;
+            print(p._x);
+            print(p.z);
+
+          }),
+          customRaisedButton(context: context, label: 'Inheritance', callback: () {
+
+            var dog = new Dog('Barry');
+            var pika = new Pikachu();
+
+            [dog, pika].forEach((a) => print('${a.name} have been release: ${a.noise}') );
+          }),
           customRaisedButton(context: context, label: 'Unused', callback: () {}),
           customRaisedButton(context: context, label: 'Unused', callback: () {}),
           customRaisedButton(context: context, label: 'Unused', callback: () {}),
@@ -377,6 +422,88 @@ class GridContainer extends StatelessWidget {
       onPressed: callback
     );
 
+  }
+}
+
+abstract class Animal {
+  String name;
+
+  Animal(this.name);
+
+  String get noise;
+  
+}
+
+class Dog extends Animal {
+  Dog(String name) : super(name);
+
+  String get noise => 'bark';
+}
+
+class Pikachu implements Animal {
+  String name = 'Pikachu';
+  String get noise => 'pika';
+}
+
+class Position3 {
+  int _x;
+  int _y;
+
+  Position3(this._x, this._y);
+
+  void set x(int val) {
+    _x = val;
+  }
+
+  double get z => sqrt(_x);
+}
+
+class Position2 {
+  final int x;
+  final int y;
+  final double z;
+
+  Position2(x, y) : this.x = x, this.y = y, z = sqrt(x+y);
+
+  String toString() => '[$x, $y, $z]';
+}
+
+class Position1 {
+  int x;
+  int y;
+
+  double distanceTo(Position1 other) {
+
+    var dx = other.x - x;
+    var dy = other.y - y;
+
+    return sqrt(dx * dx + dy * dy);
+  }
+}
+
+class Position {
+  int x;
+  int y;
+
+  Position(this.x, this.y);
+
+  Position.atOrigin() {
+    x = 0;
+    y = 0;
+  }
+
+  factory Position.fromMap(Map m) {
+    return new Position(m['x'], m['y']);
+  }
+
+  String toString() => "[$x, $y]";
+
+  double distanceTo(Position other) {
+
+    var dx = other.x - x;
+    var dy = other.y - y;
+
+    return sqrt(dx * dx + dy * dy);
   }
 }
 
