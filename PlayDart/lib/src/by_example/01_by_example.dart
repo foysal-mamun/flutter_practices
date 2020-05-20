@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'dart:collection';
 import 'dart:math';
+import 'dart:io';
+import '../cuslibs/utils.dart' as utils;
 
 class ByExampleDemos extends StatelessWidget {
 	static const String demoName = 'By Example';
@@ -405,6 +408,69 @@ class GridContainer extends StatelessWidget {
 
             [dog, pika].forEach((a) => print('${a.name} have been release: ${a.noise}') );
           }),
+          customRaisedButton(context: context, label: 'Mixins', callback: () {
+
+            var origin = new Position4()
+              ..x = 0
+              ..y = 0;
+
+            var square = new SquareView()
+              ..x = 5
+              ..y = 5
+              ..width = 10
+              ..height = 10;
+
+              print(square.distanceTo(origin));
+              print(square.area);
+
+          }),
+          customRaisedButton(context: context, label: 'Libraries', callback: () {
+
+            print(utils.shout('Foysal'));
+            print(utils.whisper('Mamun'));
+          }),
+          customRaisedButton(context: context, label: 'Futures', callback: () {
+
+            //onReady.then((String status) {
+            //  print(status);
+            //});
+
+          }),
+          customRaisedButton(context: context, label: 'Streams', callback: () {
+
+            new Stream.fromIterable([1,3,5]).listen((i) {
+
+              print(i);
+
+            });
+
+            new Stream.periodic(new Duration(milliseconds: 300)).take(3).listen((_) {
+              print('s2');
+            });
+
+          }),
+          customRaisedButton(context: context, label: 'Iterators', callback: () {
+
+            var iter = [1,2,3].iterator;
+            while(iter.moveNext()) {
+              print(iter.current);
+            }
+
+          }),
+          customRaisedButton(context: context, label: 'Iterables', callback: () {
+
+            var set = new Set()..add('1')..add(2);
+            for(var num in set) {
+              print(num);
+            }
+
+          }),
+          customRaisedButton(context: context, label: 'Https', callback: () {
+
+            //var server = await HttpServer.bind(InternetAddress.ANY_IP_V4, 8777);
+            //print('serving on port ${server.port}');
+
+          }),
           customRaisedButton(context: context, label: 'Unused', callback: () {}),
           customRaisedButton(context: context, label: 'Unused', callback: () {}),
           customRaisedButton(context: context, label: 'Unused', callback: () {}),
@@ -423,6 +489,39 @@ class GridContainer extends StatelessWidget {
     );
 
   }
+
+  Future get onReady {
+
+    var dur = new Duration(seconds: 1);
+    var oneSecond = new Future.delayed(dur);
+
+    return oneSecond.then((_) {
+      return 'loaded';
+    });
+  }
+}
+
+class SquareView extends Square with Position4 {
+  
+}
+
+class Position4 {
+  int x;
+  int y;
+
+  double distanceTo(Position4 other) {
+    var dx = other.x - x;
+    var dy = other.y - y;
+
+    return sqrt( dx*dx + dy*dy);
+  }
+}
+
+class Square {
+  int width;
+  int height;
+
+  int get area => width * height;
 }
 
 abstract class Animal {
