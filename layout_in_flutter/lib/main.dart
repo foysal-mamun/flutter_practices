@@ -37,6 +37,46 @@ class MyHomePage extends StatelessWidget {
         ]
       )
     );
+
+    Widget layout1 = Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            'Hello World',
+            textDirection: TextDirection.rtl,
+            style: TextStyle(
+              fontSize: 32,
+              color: Colors.black87
+            )
+          ),
+          Image.asset(
+            'images/lake.jpg'
+          ),
+          Icon(
+            Icons.star,
+            color: Colors.red[500]
+          )
+        ]
+      )
+    );
+
+    Widget layout2 = Container(
+      decoration: BoxDecoration(
+        color: Colors.black26,
+        border: Border.all(width: 10, color: Colors.black38),
+        borderRadius: const BorderRadius.all(const Radius.circular(8))
+      ),
+      margin: const EdgeInsets.all(4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded( child: Image.asset('images/lake.jpg') ),
+          Expanded( child: Image.asset('images/lake.jpg'), flex: 2 ),
+          Expanded( child: Image.asset('images/lake.jpg') )
+        ]
+      )
+    );
    
     return Scaffold(
       appBar: AppBar(
@@ -52,11 +92,18 @@ class MyHomePage extends StatelessWidget {
           ),
           titleSection,
           buttonSection,
-          textSection
+          textSection,
+          Divider(height: 1),
+          layout1,
+          Divider(),
+          layout2,
+          Divider()
         ]
       )
     );
   }
+
+  
 
   Widget textSection = Container(
     padding: const EdgeInsets.all(32),
