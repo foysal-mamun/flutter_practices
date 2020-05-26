@@ -8,13 +8,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.4.1"
-  awesome_package:
-    dependency: "direct main"
-    description:
-      name: awesome_package
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.0.1"
   boolean_selector:
     dependency: transitive
     description:

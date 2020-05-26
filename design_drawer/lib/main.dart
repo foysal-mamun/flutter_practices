@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
+      theme: ThemeData(fontFamily: 'Raleway'),
       home: MyHomePage(title: appTitle)
     );
   }
@@ -121,7 +122,12 @@ class SnackBarPage extends StatelessWidget {
           // it to show a SnackBar.
           Scaffold.of(context).showSnackBar(snackBar);
         },
-        child: Text('Show SnackBar'),
+        child: Text(
+          'Show SnackBar',
+          style: TextStyle(
+            fontFamily: 'Roboto'
+          ),
+        ),
       ),
     );
   }
