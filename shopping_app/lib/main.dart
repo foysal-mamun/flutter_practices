@@ -3,19 +3,11 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     title: 'Shopping App',
-    home: ShoppingList(
-      products: <Product>[
-        Product(name: 'Eggs'),
-        Product(name: 'Flout'),
-        Product(name: 'Chocolate chips')
-      ]),
+    home: ShoppingList(),
   ));
 }
 
 class ShoppingList extends StatelessWidget {
-  ShoppingList({ Key key, this.products }) : super(key: key);
-
-  final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
@@ -25,31 +17,28 @@ class ShoppingList extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 8.0),
-        children: products.map((Product product) {
-          return ShoppingListItem(
-            product: product,
-          );
-        }).toList(),
+        children: <Widget>[
+          ListTile(
+            leading: CircleAvatar(
+              child: Text('1'),
+            ),
+            title: Text('Product 1'),
+          ),
+          ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.black54,
+              child: Text('2'),
+            ),
+            title: Text(
+              'Product 1', 
+              style: TextStyle( 
+                color: Colors.black54, 
+                decoration: TextDecoration.lineThrough,
+              )
+            )
+          )
+        ],
       ),
-    );
-  }
-}
-
-class Product {
-  const Product({ this.name });
-
-  final String name;
-}
-
-class ShoppingListItem extends StatelessWidget {
-  ShoppingListItem({ this.product }) : super(key: ObjectKey(product));
-
-  final Product product;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(product.name),
     );
   }
 }
