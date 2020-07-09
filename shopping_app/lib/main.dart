@@ -4,7 +4,7 @@ void main() {
   runApp(MaterialApp(
     title: 'Shopping App',
     home: ShoppingList(
-      products: [
+      products: <Product>[
         Product(id: 1, name: 'Product 1'),
         Product(id: 2, name: 'Product 2'),
         Product(id: 3, name: 'Product 3'),
@@ -14,45 +14,48 @@ void main() {
   ));
 }
 
-class ShoppingList extends StatelessWidget {
-
-  ShoppingList({ Key key, this.products}) : super(key: key);
+class ShoppingList extends StatefulWidget {
+  ShoppingList({Key key, this.products}) : super(key: key);
 
   final List<Product> products;
 
+  _ShoppingListState createState() => _ShoppingListState();
+}
+
+class _ShoppingListState extends State<ShoppingList> {
   Set<Product> _shoppingCart = Set<Product>();
 
-  void _handleCartChange(Product product, bool inCart) {
-    if(!inCart) {
-      _shoppingCart.add(product);
-    } else {
-      _shoppingCart.remove(product);
-    }
-    print(_shoppingCart);
+  void _handleCartChanged(Product product, bool inCart) {
+    setState(() {
+      if (!inCart) {
+        _shoppingCart.add(product);
+      } else {
+        _shoppingCart.remove(product);
+      }
+    });
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Shopping List'),
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        children: products.map( (Product product) {
-          return ShoppingListItem(
-            product: product,
-            inCart: product.id.isEven ? true : false,
-            onCartChanged: _handleCartChange,
-          );
-        }).toList(),
-      ),
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          children: widget.products.map((Product product) {
+            return ShoppingListItem(
+              product: product,
+              inCart: _shoppingCart.contains(product),
+              onCartChanged: _handleCartChanged,
+            );
+          }).toList()),
     );
   }
 }
 
 class Product {
-  Product({this.id, this.name});
+  const Product({this.id, this.name});
 
   final String name;
   final int id;
@@ -61,8 +64,8 @@ class Product {
 typedef void CartChangedCallback(Product product, bool inCart);
 
 class ShoppingListItem extends StatelessWidget {
-
-  ShoppingListItem({ this.product, this.inCart, this.onCartChanged }) : super(key: ObjectKey(product));
+  ShoppingListItem({this.product, this.inCart, this.onCartChanged})
+      : super(key: ObjectKey(product));
 
   final Product product;
   final bool inCart;
@@ -73,28 +76,24 @@ class ShoppingListItem extends StatelessWidget {
   }
 
   TextStyle _getTextStyle(BuildContext context) {
-    if(!inCart) return null;
+    if (!inCart) {
+      return null;
+    }
 
     return TextStyle(
-      color: Colors.black54,
-      decoration: TextDecoration.lineThrough
-    );
+        color: Colors.black, decoration: TextDecoration.lineThrough);
   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        onCartChanged(product, inCart);
-      },
-      leading: CircleAvatar(
-        child: Text('${product.id}'),
-        backgroundColor: _getColor(context)
-      ),
-      title: Text(
-        product.name,
-        style: _getTextStyle(context),
-      ),
-    );
+        onTap: () {
+          onCartChanged(product, inCart);
+        },
+        leading: CircleAvatar(
+          child: Text('${product.id}'),
+          backgroundColor: _getColor(context),
+        ),
+        title: Text(product.name, style: _getTextStyle(context)));
   }
 }
