@@ -83,14 +83,17 @@ class ShoppingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        title: Text(
-          product.name,
-          style: _getStyle(),
-        ),
-        leading: CircleAvatar(
-          child: Text('${product.id}'),
-          backgroundColor: _getColor(context),
-        ));
+      title: Text(
+        product.name,
+        style: _getStyle(),
+      ),
+      leading: CircleAvatar(
+        child: Text('${product.id}'),
+        backgroundColor: _getColor(context),
+      ),
+      onTap: () => Provider.of<ShoppingCart>(context, listen: false)
+          .updateShoppingCart(product, inCart),
+    );
   }
 }
 

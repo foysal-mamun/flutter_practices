@@ -8,20 +8,11 @@ void main() {
   ));
 }
 
-class Counter extends ChangeNotifier {
-  int value = 0;
-
-  void increment() {
-    value += 1;
-    notifyListeners();
-  }
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Provider Demo',
+      title: 'Provider App',
       home: MyHomePage(),
     );
   }
@@ -32,7 +23,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Provider Counter'),
+        title: Text('Counter'),
       ),
       body: Center(
         child: Column(
@@ -42,7 +33,7 @@ class MyHomePage extends StatelessWidget {
             Consumer<Counter>(
               builder: (context, counter, child) => Text(
                 '${counter.value}',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headline6,
               ),
             )
           ],
@@ -51,9 +42,18 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
             Provider.of<Counter>(context, listen: false).increment(),
-        tooltip: 'Incremetn',
+        tooltip: 'Increament',
         child: Icon(Icons.add),
       ),
     );
+  }
+}
+
+class Counter extends ChangeNotifier {
+  int value = 0;
+
+  void increment() {
+    value += 1;
+    notifyListeners();
   }
 }
