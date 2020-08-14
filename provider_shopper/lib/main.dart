@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider_shopper/common/theme.dart';
+import 'package:provider_shopper/screens/cart.dart';
 import 'package:provider_shopper/screens/login.dart';
+import 'package:provider_shopper/screens/catalog.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +15,11 @@ class MyApp extends StatelessWidget {
       title: 'Provider Demo',
       theme: appTheme,
       initialRoute: '/',
-      routes: {'/': (context) => MyLogin()},
+      routes: {
+        '/': (context) => MyLogin(),
+        '/catalog': (context) => MyCatalog(),
+        '/cart': (context) => MyCart()
+      },
     );
   }
 }

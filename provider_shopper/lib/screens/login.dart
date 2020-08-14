@@ -7,6 +7,30 @@ class MyLogin extends StatelessWidget {
       body: Center(
         child: Container(
           padding: EdgeInsets.all(80.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Welcome',
+                style: Theme.of(context).textTheme.headline1,
+              ),
+              TextFormField(
+                decoration: InputDecoration(hintText: 'Username'),
+              ),
+              TextFormField(
+                decoration: InputDecoration(hintText: 'Password'),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              RaisedButton(
+                  color: Colors.yellow,
+                  child: Text('Enter'),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/catalog');
+                  })
+            ],
+          ),
         ),
       ),
     );
