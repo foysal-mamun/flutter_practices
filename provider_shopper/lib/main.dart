@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider_shopper/common/theme.dart';
+import 'package:provider_shopper/models/catalog.dart';
 import 'package:provider_shopper/screens/cart.dart';
 import 'package:provider_shopper/screens/login.dart';
 import 'package:provider_shopper/screens/catalog.dart';
@@ -11,15 +13,22 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Provider Demo',
-      theme: appTheme,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyLogin(),
-        '/catalog': (context) => MyCatalog(),
-        '/cart': (context) => MyCart()
-      },
+    return MultiProvider(
+      providers: [
+        Provider(
+          create: (context) => CatalogModel(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Provider Demo',
+        theme: appTheme,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MyLogin(),
+          '/catalog': (context) => MyCatalog(),
+          '/cart': (context) => MyCart()
+        },
+      ),
     );
   }
 }
