@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_shopper/common/theme.dart';
+import 'package:provider_shopper/models/cart.dart';
 import 'package:provider_shopper/models/catalog.dart';
 import 'package:provider_shopper/screens/cart.dart';
 import 'package:provider_shopper/screens/login.dart';
@@ -17,6 +18,13 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider(
           create: (context) => CatalogModel(),
+        ),
+        ChangeNotifierProxyProvider<CatalogModel, CartModel>(
+          create: (context) => CartModel(),
+          update: (context, catalog, cart) {
+            cart.catalog = catalog;
+            return cart;
+          },
         )
       ],
       child: MaterialApp(
