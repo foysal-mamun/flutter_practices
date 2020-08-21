@@ -40,4 +40,11 @@ class CartModel extends ChangeNotifier {
     // depend on it.
     notifyListeners();
   }
+
+  void remove(Item item) {
+    _itemIds.remove(item.id);
+    // print(_itemIds);
+
+    notifyListeners();
+  }
 }
