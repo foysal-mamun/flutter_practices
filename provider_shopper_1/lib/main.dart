@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider_shopper_1/screens/catalog.dart';
 
 import 'screens/login.dart';
 
@@ -11,7 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Provider Practice',
-      routes: {'/': (context) => MyLogin()},
+      routes: {
+        '/': (context) => MyLogin(),
+        '/catalog': (context) => MyCatalog()
+      },
     );
   }
 }

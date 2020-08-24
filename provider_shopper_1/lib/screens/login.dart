@@ -17,7 +17,8 @@ class MyLogin extends StatelessWidget {
                 height: 80,
               ),
               RaisedButton(
-                onPressed: null,
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, '/catalog'),
                 child: Text('Login'),
               )
             ],
