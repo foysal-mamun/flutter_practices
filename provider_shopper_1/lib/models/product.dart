@@ -1,5 +1,6 @@
 class Product {
-  const Product({this.name});
+  const Product({this.id, this.name});
 
+  final int id;
   final String name;
 }

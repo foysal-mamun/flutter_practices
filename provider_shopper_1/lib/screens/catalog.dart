@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_shopper_1/models/cart.dart';
 import 'package:provider_shopper_1/models/catalog.dart';
 import 'package:provider_shopper_1/models/product.dart';
 
@@ -43,8 +45,11 @@ class _MyListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cart = Provider.of<CartModel>(context);
     return ListTile(
-        onTap: null,
+        onTap: cart.products.contains(product)
+            ? () => cart.remove(product)
+            : () => cart.add(product),
         leading: CircleAvatar(
           child: Text(product.name[0]),
         ),
