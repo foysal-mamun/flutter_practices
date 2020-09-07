@@ -8,17 +8,22 @@ class MyCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReuseableWidgets.getAppBar('My Catalog'),
+      appBar: ReuseableWidgets.getAppBar(context, 'My Catalog'),
       body: _MyList(),
     );
   }
 }
 
 class ReuseableWidgets {
-  static getAppBar(String title) {
+  static getAppBar(BuildContext context, String title) {
     return AppBar(
       title: Text(title),
-      actions: [IconButton(icon: Icon(Icons.shopping_cart), onPressed: null)],
+      actions: [
+        IconButton(
+          icon: Icon(Icons.shopping_cart),
+          onPressed: () => Navigator.pushNamed(context, '/cart'),
+        )
+      ],
     );
   }
 }

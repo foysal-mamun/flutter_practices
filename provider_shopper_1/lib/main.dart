@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_shopper_1/models/cart.dart';
 import 'package:provider_shopper_1/models/catalog.dart';
+import 'package:provider_shopper_1/screens/cart.dart';
 import 'package:provider_shopper_1/screens/catalog.dart';
 
 import 'screens/login.dart';
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
           title: 'Provider Practice',
           routes: {
             '/': (context) => MyLogin(),
-            '/catalog': (context) => MyCatalog()
+            '/catalog': (context) => MyCatalog(),
+            '/cart': (context) => MyCart()
           },
         ));
   }
